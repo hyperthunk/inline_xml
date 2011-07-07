@@ -1,0 +1,6 @@
+{application,
+ inline_xml,
+ [{description,"Inline XML"},
+  {vsn, "0.0.1"},
+  {applications,[kernel,stdlib]},
+  {env,[]}]}.

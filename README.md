@@ -1,6 +1,7 @@
 # Inline XML Parse Transform Utility
 
-An inline_xml parse transform, based loosely on [this](http://www.google.com).
+An inline_xml parse transform, based loosely on 
+[this](http://hyperstruct.net/2007/06/26/literal-xml-in-erlang-with-parse-transform-2/).
 
 ## Usage
 
@@ -53,30 +54,11 @@ demo() ->
     Xml = '<foo attr="baz"><bar>x</bar><bar>y</bar></foo>',
     {"foo",
          [{"attr","baz"}],
-         [{"bar",[],["x"]},{"bar",[],["y"]}]} = Xml.
-    io:format("~p~n", [Xml]).
-
-```
-
-In fact, the erlsom library has some additional support available, for example the
-use of XML schemas (for use in erlsom's data binding mode) is supported. You can
-enable this support by including the requisite header file and declaring your XSD
-files in the following manner.
-
-```erlang
--module(custom).
--compile(export_all).
--import_xsd(["priv/xsd/file1.xsd", "priv/xsd/file2.xsd"]).
--include_lib("inline_xml/include/inline_erlsom.hrl").
-
-demo() ->
-    Xml = '<foo attr="baz"><bar>x</bar><bar>y</bar></foo>',
-    {"foo",
-         [{"attr","baz"}],
-         [{"bar",[],["x"]},{"bar",[],["y"]}]} = Xml.
+         [{"bar",[],["x"]},{"bar",[],["y"]}]} = Xml,
     io:format("~p~n", [Xml]).
 
 ```
 
 Looking into the `inline_xml_erlsom` module and the `inline_erlsom.hrl` header 
-should give some insights into how the API customisations work.
+in the [inline_erlsom](https://github.com/hyperthunk/inline_erlsom) extension 
+should give some useful insights into how API customisations and plugins work.

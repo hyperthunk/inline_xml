@@ -1,0 +1,9 @@
+{application, xmlapi,
+ [
+  {description, "Example of using custom API calls"},
+  {vsn, "0.0.1"},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]}
+ ]}.

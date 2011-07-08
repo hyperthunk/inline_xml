@@ -41,12 +41,17 @@ do_transform(Forms, Context) ->
 %% xform_fun(attribute, Form, Ctx, State) ->
 
 xform_fun(attribute, Form, _Ctx, State) ->
-    case erl_syntax_lib:analyze_attribute(Form) of
+    NewState = case erl_syntax_lib:analyze_attribute(Form) of
         {parse_trans, verbose} ->
-            put(parse_trans.verbose, true);
-        _ -> ok
+            put(parse_trans.verbose, true),
+            State;
+        {xml_api, {xml_api, API}} when is_tuple(API) ->
+            progress_message("Processing API override: ~p~n", [API]),
+            State#state{ api=API };
+        _ -> 
+            State
     end,
-    {[], Form, [], true, State};
+    {[], Form, [], true, NewState};
 xform_fun(Thing, Form, Ctx, State=#state{ scope=Scope })
     when Thing =:= variable   orelse
          Thing =:= match_expr orelse
